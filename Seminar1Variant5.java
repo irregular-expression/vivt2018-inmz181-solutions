@@ -43,7 +43,7 @@ public class Seminar1Variant5 {
 
     private static void setUserInput() throws IOException {
         try {
-            System.out.print("Введите значение угла альфа: ");
+            System.out.print("Введите значение угла альфа:0 ");
             String s = reader.readLine();
             System.out.println(s);
             a = Double.parseDouble(s);
