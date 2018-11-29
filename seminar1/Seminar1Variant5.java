@@ -1,4 +1,4 @@
-package ru.irregularexpression.vivt.inmz181.solutions;
+package ru.irregularexpression.vivt.inmz181.solutions.seminar1;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -43,9 +43,8 @@ public class Seminar1Variant5 {
 
     private static void setUserInput() throws IOException {
         try {
-            System.out.print("Введите значение угла альфа:0 ");
+            System.out.print("Введите значение угла альфа: ");
             String s = reader.readLine();
-            System.out.println(s);
             a = Double.parseDouble(s);
         } catch (NumberFormatException e) {
             System.out.println("Некорректный ввод! Введёное значение должно быть числом.");
