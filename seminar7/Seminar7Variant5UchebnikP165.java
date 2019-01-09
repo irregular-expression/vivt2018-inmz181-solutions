@@ -1,14 +1,12 @@
 package ru.irregularexpression.vivt.inmz181.solutions.seminar7;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.util.TreeMap;
 import java.util.Map;
 
 public class Seminar7Variant5UchebnikP165 {
 
-    static HashMap<String, Book> library = new HashMap<>();
+    static TreeMap<String, Book> library = new TreeMap<>();
     static String CATALOG_PATH;
     private static final String IO_ERROR_MESSAGE = "Произошла ошибка ввода-вывода. Перезапустите приложение и/или проверьте работоспособность системного метода консольного ввода";
 
@@ -25,12 +23,12 @@ public class Seminar7Variant5UchebnikP165 {
         } catch (IOException e) {
             System.out.println(IO_ERROR_MESSAGE);
         }
-        System.out.println("Библиотека открыта. Введите желаемый тип действия: ");
-        System.out.println("0 - показать все книги в наличии; \n" +
-                "1 - добавить новую книгу в Каталог; \n" +
-                "2 - взять книгу по УДК; \n" +
-                "3 - вернуть книгу по УДК; \n");
+        System.out.println("Библиотека открыта. Введите команду (? - справка).");
 
+        boolean isExit = false;
+        while (!isExit) {
+            isExit = getCommand();
+        }
 
         try {
             saveLibraryChanges();
@@ -38,8 +36,33 @@ public class Seminar7Variant5UchebnikP165 {
         } catch (IOException e) {
             System.out.println(IO_ERROR_MESSAGE);
         }
+    }
 
+    private static boolean getCommand() {
+        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+        try {
+            String command = reader.readLine();
+            switch (command) {
+                case "?":
+                    showHelp();
+                    break;
+                case "0":
+                    showAllBooks();
+                    break;
+                case "1":
+                case "2":
+                case "3":
+                case "#":
+                    return true;
+                default:
+                    System.out.println("Неизвестная команда. Для просмотра списка команд введите ?");
+            }
+            return false;
 
+        } catch (IOException e) {
+            System.out.println(IO_ERROR_MESSAGE);
+            return false;
+        }
     }
 
     private static void initializeLibrary() throws IOException {
@@ -107,5 +130,20 @@ public class Seminar7Variant5UchebnikP165 {
             System.out.println("Некорректный адрес файла или директории. Попытайтесь снова.");
             return getFile();
         }
+    }
+    
+    private static void showAllBooks() {
+        for (Map.Entry<String, Book> book : library.entrySet()) {
+
+        }
+    }
+
+    private static void showHelp() {
+        System.out.println("0 - показать все книги в наличии; \n" +
+                "1 - добавить новую книгу в Каталог; \n" +
+                "2 - взять книгу по УДК; \n" +
+                "3 - вернуть книгу по УДК; \n" +
+                "? - показать справку. \n" +
+                "# - выход из программы. \n");
     }
 }
