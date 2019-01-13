@@ -1,34 +1,28 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar7;
+package ru.irregularexpression.vivt.inmz181.solutions.seminar9;
 
 import java.io.*;
-import java.util.TreeMap;
 import java.util.Map;
+import java.util.TreeMap;
 import java.util.regex.Pattern;
 
-public class Seminar7Variant5UchebnikP165 {
+public class Seminar9Variant5 {
 
-    static TreeMap<String, Book> library = new TreeMap<>();
+    static TreeMap<String, Book> library;
     static String CATALOG_PATH;
     private static final String IO_ERROR_MESSAGE = "Произошла ошибка ввода-вывода. Перезапустите приложение и/или проверьте работоспособность системного метода консольного ввода";
 
-
     /**
-     * Консольное приложение на Java
+     * Консольное приложение на Java.
+     * Решение полностью идентично аналогичному заданию варианта 5 седьмого семинара
+     * (со страницы 165 учебника). Только без реализации хранения каталога библиотеки в файле.
      *
      * @param args - параметр метода main() по умолчанию в Java. Не используется в коде.
      */
     public static void main(String[] args) {
-        System.out.println("Учебник, задания со с.165. Вариант 5.");
-        System.out.println("Электронная библиотека.");
-        try {
-            initializeLibrary();
-        } catch (IOException e) {
-            System.out.println(IO_ERROR_MESSAGE);
-            e.printStackTrace();
-            return;
-        }
+        System.out.println("Семинар 9. Вариант 5.");
+        System.out.println("Электронная библиотека (без сохранения каталога в файл, решение с сохранением - в семинаре 7).");
+        initializeLibrary();
         System.out.println("Библиотека открыта.");
-
 
         boolean isExit = false;
         while (!isExit) {
@@ -36,13 +30,8 @@ public class Seminar7Variant5UchebnikP165 {
             isExit = getCommand();
         }
 
-        try {
-            saveLibraryChanges();
-            System.out.println("Вы покинули библиотеку. Изменения сохранены. Возвращайтесь снова.");
-        } catch (IOException e) {
-            System.out.println(IO_ERROR_MESSAGE);
-
-        }
+        saveLibraryChanges();
+        System.out.println("Вы покинули библиотеку. Изменения не были сохранены.");
     }
 
     private static boolean getCommand() {
@@ -87,75 +76,13 @@ public class Seminar7Variant5UchebnikP165 {
         }
     }
 
-    private static void initializeLibrary() throws IOException {
-        BufferedReader reader = new BufferedReader(getFile());
-        int cursor = 4;
-        Book book = new Book();
-        while (reader.ready()) {
-            String data = reader.readLine();
-            cursor = (cursor + 1) % 6;
-            switch (cursor) {
-                case 5:
-                    book.udk = data;
-                    break;
-                case 0:
-                    book.author = data;
-                    break;
-                case 1:
-                    book.title = data;
-                    break;
-                case 2:
-                    book.year = Integer.parseInt(data);
-                    break;
-                case 3:
-                    book.countInLibrary = Integer.parseInt(data);
-                    break;
-                case 4:
-                    if (book.udk != null) library.put(book.udk, book);
-                    book = new Book();
-            }
-        }
-        System.out.printf("В каталоге библиотеки на настоящий момент хранится %d наименований книг.\n", library.size());
-        reader.close();
+    private static void initializeLibrary() {
+        library = new TreeMap<>();
+        System.out.println("В каталоге библиотеки на настоящий момент хранится 0 наименований книг.\n");
     }
 
-    private static void saveLibraryChanges() throws IOException {
-        BufferedWriter writer = new BufferedWriter(new FileWriter(new File(CATALOG_PATH)));
-        for (Map.Entry<String, Book> book : library.entrySet()) {
-            writer.write(book.getValue().udk + System.getProperty("line.separator"));
-            writer.write(book.getValue().author + System.getProperty("line.separator"));
-            writer.write(book.getValue().title + System.getProperty("line.separator"));
-            writer.write(String.valueOf(book.getValue().year) + System.getProperty("line.separator"));
-            writer.write(String.valueOf(book.getValue().countInLibrary) + System.getProperty("line.separator"));
-            writer.newLine();
-        }
-        writer.close();
-    }
-
-    private static FileReader getFile() throws IOException {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
-        try {
-            System.out.print("Введите полный путь к файлу catalog.txt для хранения каталога библиотеки: ");
-            String path = reader.readLine();
-            File f = new File(path);
-            if (f.exists()) {
-                if (f.isDirectory()) {
-                    PrintWriter writer = new PrintWriter(CATALOG_PATH, "UTF-8");
-                    writer.write("");
-                    writer.close();
-                    return new FileReader(new File(CATALOG_PATH));
-                } else {
-                    CATALOG_PATH = path;
-                    return new FileReader(f);
-                }
-            } else {
-                throw new FileNotFoundException();
-            }
-        } catch (FileNotFoundException e) {
-            System.out.println("Некорректный адрес файла или директории. Попытайтесь снова.");
-            e.printStackTrace();
-            return getFile();
-        }
+    private static void saveLibraryChanges() {
+         //Не требуется по условию задачи.
     }
 
     private static void showAllBooks() {
@@ -283,7 +210,6 @@ public class Seminar7Variant5UchebnikP165 {
         } catch (NumberFormatException e) {
             System.out.println("Ошибка! Год издания и количество экземпляров - целые числа!");
         }
-
     }
 
 
