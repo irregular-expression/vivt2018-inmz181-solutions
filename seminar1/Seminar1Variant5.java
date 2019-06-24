@@ -1,4 +1,4 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar1;
+package seminar1;
 
 import java.io.BufferedReader;
 import java.io.IOException;

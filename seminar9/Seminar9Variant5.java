@@ -1,4 +1,4 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar9;
+package seminar9;
 
 import java.io.*;
 import java.util.Map;

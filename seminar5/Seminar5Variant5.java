@@ -1,4 +1,4 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar5;
+package seminar5;
 
 import java.io.*;
 

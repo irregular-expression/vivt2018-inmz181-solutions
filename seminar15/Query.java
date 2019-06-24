@@ -1,4 +1,4 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar15;
+package seminar15;
 
 import java.util.Date;
 

@@ -1,6 +1,6 @@
-package ru.irregularexpression.vivt.inmz181.solutions.seminar15;
+package seminar15;
 
-import ru.irregularexpression.vivt.inmz181.solutions.seminar7.Book;
+import seminar7.Book;
 
 import java.io.*;
 import java.util.*;
