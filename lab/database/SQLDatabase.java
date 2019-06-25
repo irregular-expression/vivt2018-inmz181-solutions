@@ -51,7 +51,7 @@ public class SQLDatabase {
     public static void init() throws ClassNotFoundException, SQLException {
         Class.forName("org.h2.Driver");
         try (Statement statement = getConnection().createStatement()) {
-            statement.execute("create table if not exist user(" +
+            statement.execute("create table if not exists user(" +
                     "id integer primary key auto_increment, " +
                     "name varchar(100)," +
                     "phone varchar(100)," +

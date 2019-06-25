@@ -24,8 +24,8 @@ public class PhonebookApp {
                     SQLDatabase.init();
 
                     PhonebookApp phonebook = new PhonebookApp();
-                    phonebook.addAddressFrame.setVisible(true);
-                    //phonebook.searchFrame.setVisible(true);
+                    //phonebook.addAddressFrame.setVisible(true);
+                    phonebook.searchFrame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
