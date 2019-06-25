@@ -1,5 +1,6 @@
 package lab;
 
+import lab.database.SQLDatabase;
 import lab.forms.AddAddressForm;
 import lab.forms.SearchForm;
 
@@ -16,12 +17,15 @@ public class PhonebookApp {
      * Launch the application.
      */
     public static void main(String[] args) {
+
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
+                    SQLDatabase.init();
+
                     PhonebookApp phonebook = new PhonebookApp();
-                    //phonebook.addAddressFrame.setVisible(true);
-                    phonebook.searchFrame.setVisible(true);
+                    phonebook.addAddressFrame.setVisible(true);
+                    //phonebook.searchFrame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
