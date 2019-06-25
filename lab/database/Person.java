@@ -4,16 +4,12 @@ public class Person {
     private int id;
     private String name;
     private String phone;
-    private boolean sex;
-    private String address;
     private String email;
 
-    public Person(int id, String name, String phone, boolean sex, String address, String email) {
+    public Person(int id, String name, String phone, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
-        this.sex = sex;
-        this.address = address;
         this.email = email;
     }
 
@@ -41,22 +37,6 @@ public class Person {
         this.phone = phone;
     }
 
-    public boolean isSex() {
-        return sex;
-    }
-
-    public void setSex(boolean sex) {
-        this.sex = sex;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -69,9 +49,7 @@ public class Person {
     public String toString() {
         return "Ф.И.О.: " + name +
                "\nТелефон: " + phone +
-                "\nАдрес: " + address +
-                "\nE-mail: " + email +
-                "\nПол: " + (sex ? "Мужской" : "Женский");
+                "\nE-mail: " + email;
     }
 
 

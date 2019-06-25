@@ -11,11 +11,9 @@ public class SQLDatabase {
             try (Statement statement = connection.createStatement()) {
                 connection.setAutoCommit(false);
                 try {
-                    statement.execute("insert into user(name, phone, sex, address, email) values(" +
+                    statement.execute("insert into user(name, phone, email) values(" +
                             person.getName() + ", " +
                             person.getPhone() + ", " +
-                            person.isSex() + ", " +
-                            person.getAddress() + ", " +
                             person.getEmail() + ")");
                     connection.commit();
                 } catch (SQLException e)  {
@@ -35,8 +33,6 @@ public class SQLDatabase {
                     persons.add(new Person(rs.getInt("id"),
                             rs.getString("name"),
                             rs.getString("phone"),
-                            rs.getBoolean("sex"),
-                            rs.getString("address"),
                             rs.getString("email")));
                 }
             }
@@ -52,14 +48,12 @@ public class SQLDatabase {
                     "id integer primary key auto_increment, " +
                     "name varchar(100)," +
                     "phone varchar(100)," +
-                    "sex boolean," +
-                    "address varchar(100)," +
                     "email varchar(100));");
         }
     }
 
     public static Connection getConnection() throws SQLException {
-        return DriverManager.getConnection("jdbc:h2:mem:test");
+        return DriverManager.getConnection("jdbc:h2:~/phonebook_db;DB_CLOSE_ON_EXIT=FALSE");
     }
 
 

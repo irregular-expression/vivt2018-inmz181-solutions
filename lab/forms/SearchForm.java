@@ -17,6 +17,7 @@ public class SearchForm extends JFrame {
 
     private UserFormController controller;
     private List<Person> persons;
+    private JList<String> list1;
 
     public SearchForm(UserFormController controller) {
         this.controller = controller;
@@ -42,11 +43,11 @@ public class SearchForm extends JFrame {
         b.setBounds(280,10,160,30);
         this.add(b);
 
-        final DefaultListModel<String> l1 = new DefaultListModel<>();
+        DefaultListModel<String> l1 = new DefaultListModel<>();
         for (int i = 0; i < persons.size(); i++) {
             l1.addElement(persons.get(i).getName());
         }
-        final JList<String> list1 = new JList<>(l1);
+        list1 = new JList<>(l1);
         list1.setBounds(30,10, 200,300);
         list1.addListSelectionListener(new ListSelectionListener() {
             @Override
@@ -66,6 +67,21 @@ public class SearchForm extends JFrame {
             }
         });
 
+    }
+
+
+    public void updateData() {
+        try {
+            persons = SQLDatabase.getFromDb();
+        } catch (SQLException e) {
+            persons = new ArrayList<>();
+            e.printStackTrace();
+        }
+        DefaultListModel<String> l1 = new DefaultListModel<>();
+        for (int i = 0; i < persons.size(); i++) {
+            l1.addElement(persons.get(i).getName());
+        }
+        list1.setModel(l1);
     }
 
 }
