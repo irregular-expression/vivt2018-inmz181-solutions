@@ -11,12 +11,12 @@ public class SQLDatabase {
             try (Statement statement = connection.createStatement()) {
                 connection.setAutoCommit(false);
                 try {
-                    statement.execute("insert into user(name, phone, sex, address, occupation) values(" +
+                    statement.execute("insert into user(name, phone, sex, address, email) values(" +
                             person.getName() + ", " +
                             person.getPhone() + ", " +
                             person.isSex() + ", " +
                             person.getAddress() + ", " +
-                            person.getOccupation() + ")");
+                            person.getEmail() + ")");
                     connection.commit();
                 } catch (SQLException e)  {
                     connection.rollback();
@@ -37,7 +37,7 @@ public class SQLDatabase {
                             rs.getString("phone"),
                             rs.getBoolean("sex"),
                             rs.getString("address"),
-                            rs.getString("occupation")));
+                            rs.getString("email")));
                 }
             }
         }
@@ -54,7 +54,7 @@ public class SQLDatabase {
                     "phone varchar(100)," +
                     "sex boolean," +
                     "address varchar(100)," +
-                    "occupation varchar(100));");
+                    "email varchar(100));");
         }
     }
 

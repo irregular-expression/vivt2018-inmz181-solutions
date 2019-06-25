@@ -6,15 +6,15 @@ public class Person {
     private String phone;
     private boolean sex;
     private String address;
-    private String occupation;
+    private String email;
 
-    public Person(int id, String name, String phone, boolean sex, String address, String occupation) {
+    public Person(int id, String name, String phone, boolean sex, String address, String email) {
         this.id = id;
         this.name = name;
         this.phone = phone;
         this.sex = sex;
         this.address = address;
-        this.occupation = occupation;
+        this.email = email;
     }
 
     public int getId() {
@@ -57,12 +57,21 @@ public class Person {
         this.address = address;
     }
 
-    public String getOccupation() {
-        return occupation;
+    public String getEmail() {
+        return email;
     }
 
-    public void setOccupation(String occupation) {
-        this.occupation = occupation;
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Ф.И.О.: " + name +
+               "\nТелефон: " + phone +
+                "\nАдрес: " + address +
+                "\nE-mail: " + email +
+                "\nПол: " + (sex ? "Мужской" : "Женский");
     }
 
 

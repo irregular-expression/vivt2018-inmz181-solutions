@@ -1,46 +1,68 @@
 package lab.forms;
 
 import lab.UserFormController;
+import lab.database.Person;
+import lab.database.SQLDatabase;
 
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class SearchForm extends JFrame {
 
-    public SearchForm(UserFormController controller) {
+    private UserFormController controller;
+    private List<Person> persons;
 
-        this.setBounds(100, 100, 450, 450);
+    public SearchForm(UserFormController controller) {
+        this.controller = controller;
+
+        try {
+            persons = SQLDatabase.getFromDb();
+        } catch (SQLException e) {
+            persons = new ArrayList<>();
+            e.printStackTrace();
+        }
+
+        this.setBounds(100, 100, 480, 360);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setTitle("Телефонный справочник");
         this.getContentPane().setLayout(null);
 
         final JLabel label = new JLabel();
-        label.setSize(450,100);
+        label.setBounds(250,50,200,280);
+        label.setText("Выберите абонента из списка.");
         this.add(label);
 
-        JButton b=new JButton("Добавить");
-        b.setBounds(200,150,80,30);
+        JButton b=new JButton("Добавить абонента");
+        b.setBounds(280,10,160,30);
         this.add(b);
 
         final DefaultListModel<String> l1 = new DefaultListModel<>();
-        l1.addElement("Иванов Иван Иванович");
-        l1.addElement("Петров Пётр Петрович");
-        l1.addElement("Сусликов Максим Леонидович");
-        l1.addElement("Шишигин Семён Витальевич");
-
+        for (int i = 0; i < persons.size(); i++) {
+            l1.addElement(persons.get(i).getName());
+        }
         final JList<String> list1 = new JList<>(l1);
-        list1.setBounds(100,100, 75,75);
+        list1.setBounds(30,10, 200,300);
+        list1.addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                if (list1.getSelectedIndex() != -1) {
+                    label.setText(persons.get(list1.getSelectedIndex()).toString());
+                }
+            }
+        });
         this.add(list1);
 
 
         b.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                String data = "";
-                if (list1.getSelectedIndex() != -1) {
-                    data = "" + list1.getSelectedValue();
-                    label.setText(data);
-                }
-                label.setText(data);
+                controller.openUserForm(2);
+
             }
         });
 
