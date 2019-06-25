@@ -6,6 +6,24 @@ import java.util.List;
 
 public class SQLDatabase {
 
+
+    public static void clearAll() throws SQLException {
+        try (Connection connection = getConnection()) {
+            try (Statement statement = connection.createStatement()) {
+                connection.setAutoCommit(false);
+                try {
+                    String query = "delete from user";
+                    statement.execute(query);
+                    connection.commit();
+                } catch (SQLException e)  {
+                    connection.rollback();
+                    e.printStackTrace();
+                }
+                connection.setAutoCommit(true);
+            }
+        }
+    }
+
     public static void addToDb(Person person) throws SQLException {
         try (Connection connection = getConnection()) {
             try (Statement statement = connection.createStatement()) {

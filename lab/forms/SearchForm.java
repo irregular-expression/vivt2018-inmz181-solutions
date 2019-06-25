@@ -43,6 +43,10 @@ public class SearchForm extends JFrame {
         b.setBounds(280,10,160,30);
         this.add(b);
 
+        JButton b1=new JButton("Очистить справочник");
+        b1.setBounds(280,50,160,30);
+        this.add(b1);
+
         DefaultListModel<String> l1 = new DefaultListModel<>();
         for (int i = 0; i < persons.size(); i++) {
             l1.addElement(persons.get(i).getName());
@@ -64,6 +68,19 @@ public class SearchForm extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 controller.openUserForm(2);
 
+            }
+        });
+
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+                    SQLDatabase.clearAll();
+                    updateData();
+                    label.setText("Выберите абонента из списка.");
+                } catch (SQLException ex) {
+                    ex.printStackTrace();
+                }
             }
         });
 
