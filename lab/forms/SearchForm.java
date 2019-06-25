@@ -53,7 +53,7 @@ public class SearchForm extends JFrame {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 if (list1.getSelectedIndex() != -1) {
-                    label.setText(persons.get(list1.getSelectedIndex()).toString());
+                    label.setText(persons.get(list1.getSelectedIndex()).toHtmlString());
                 }
             }
         });

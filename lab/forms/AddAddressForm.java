@@ -5,7 +5,6 @@ import lab.database.Person;
 import lab.database.SQLDatabase;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
@@ -68,12 +67,14 @@ public class AddAddressForm extends JFrame {
                     JOptionPane.showMessageDialog(null, "Незаполнены данные!");
                 } else {
                     try {
-                        SQLDatabase.addToDb(new Person(0,
+                        Person person = new Person(0,
                                 nameTextField.getText(),
                                 phoneTextField.getText(),
-                                emailTextField.getText()));
+                                emailTextField.getText());
+                        SQLDatabase.addToDb(person);
                         JOptionPane.showMessageDialog(null, "Абонент успешно добавлен в справочник!");
                         controller.openUserForm(1);
+                        System.out.println(person.toHtmlString());
                     } catch (SQLException e) {
                         JOptionPane.showMessageDialog(null, "Ошибка базы данных!");
                         e.printStackTrace();

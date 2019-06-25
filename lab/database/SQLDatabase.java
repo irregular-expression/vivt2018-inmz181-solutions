@@ -11,13 +11,17 @@ public class SQLDatabase {
             try (Statement statement = connection.createStatement()) {
                 connection.setAutoCommit(false);
                 try {
-                    statement.execute("insert into user(name, phone, email) values(" +
-                            person.getName() + ", " +
-                            person.getPhone() + ", " +
-                            person.getEmail() + ")");
+                    String query = "insert into user(name, phone, email) values('" +
+                            person.getName() + "', '" +
+                            person.getPhone() + "', '" +
+                            person.getEmail() + "')";
+
+                    statement.execute(query);
                     connection.commit();
+
                 } catch (SQLException e)  {
                     connection.rollback();
+                    e.printStackTrace();
                 }
                 connection.setAutoCommit(true);
             }

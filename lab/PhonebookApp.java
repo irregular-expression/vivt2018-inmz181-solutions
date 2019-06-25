@@ -49,6 +49,7 @@ public class PhonebookApp implements UserFormController {
                 break;
             case 1:
                 phonebook.searchFrame.setVisible(true);
+                ((SearchForm) phonebook.searchFrame).updateData();
                 phonebook.addAddressFrame.setVisible(false);
                 break;
         }

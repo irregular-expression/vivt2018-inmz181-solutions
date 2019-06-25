@@ -45,11 +45,10 @@ public class Person {
         this.email = email;
     }
 
-    @Override
-    public String toString() {
-        return "Ф.И.О.: " + name +
-               "\nТелефон: " + phone +
-                "\nE-mail: " + email;
+    public String toHtmlString() {
+        return "<html>Ф.И.О.: " + name + "<br>" +
+               "Телефон: " + phone + "<br>" +
+                "E-mail: " + email + "</html>";
     }
 
 
