@@ -8,24 +8,22 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 
-public class PhonebookApp {
+public class PhonebookApp implements UserFormController {
 
     private JFrame addAddressFrame;
     private JFrame searchFrame;
+    private static PhonebookApp phonebook;
 
     /**
      * Launch the application.
      */
     public static void main(String[] args) {
-
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
                     SQLDatabase.init();
-
-                    PhonebookApp phonebook = new PhonebookApp();
-                    //phonebook.addAddressFrame.setVisible(true);
-                    phonebook.searchFrame.setVisible(true);
+                    phonebook = new PhonebookApp();
+                    phonebook.openUserForm(1);
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -37,9 +35,22 @@ public class PhonebookApp {
      * Create the application.
      */
     public PhonebookApp() {
-        addAddressFrame = new AddAddressForm();
-        searchFrame = new SearchForm();
+        addAddressFrame = new AddAddressForm(this);
+        searchFrame = new SearchForm(this);
     }
 
 
+    @Override
+    public void openUserForm(int id) {
+        switch (id) {
+            case 2:
+                phonebook.searchFrame.setVisible(false);
+                phonebook.addAddressFrame.setVisible(true);
+                break;
+            case 1:
+                phonebook.searchFrame.setVisible(true);
+                phonebook.addAddressFrame.setVisible(false);
+                break;
+        }
+    }
 }

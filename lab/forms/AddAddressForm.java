@@ -1,5 +1,7 @@
 package lab.forms;
 
+import lab.UserFormController;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,7 +13,7 @@ public class AddAddressForm extends JFrame {
     private JTextField textField_1;
     private JTextField textField_2;
 
-    public AddAddressForm() {
+    public AddAddressForm(UserFormController controller) {
         this.setBounds(100, 100, 730, 489);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.getContentPane().setLayout(null);

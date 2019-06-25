@@ -1,12 +1,14 @@
 package lab.forms;
 
+import lab.UserFormController;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class SearchForm extends JFrame {
 
-    public SearchForm() {
+    public SearchForm(UserFormController controller) {
 
         this.setBounds(100, 100, 450, 450);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

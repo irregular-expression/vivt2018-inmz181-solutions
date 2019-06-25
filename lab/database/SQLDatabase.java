@@ -10,7 +10,6 @@ public class SQLDatabase {
         try (Connection connection = getConnection()) {
             try (Statement statement = connection.createStatement()) {
                 connection.setAutoCommit(false);
-
                 try {
                     statement.execute("insert into user(name, phone, sex, address, occupation) values(" +
                             person.getName() + ", " +
@@ -22,9 +21,7 @@ public class SQLDatabase {
                 } catch (SQLException e)  {
                     connection.rollback();
                 }
-
                 connection.setAutoCommit(true);
-
             }
         }
     }
